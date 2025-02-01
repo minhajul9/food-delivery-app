@@ -118,7 +118,7 @@ class _HomeState extends State<Home> {
                                         restaurantData!["Name"],
                                         style: TextStyle(
                                           fontSize: 28,
-                                          fontWeight: FontWeight.w800,
+                                          fontWeight: FontWeight.w900,
                                         ),
                                       ),
                                       SizedBox(
@@ -195,6 +195,15 @@ class _HomeState extends State<Home> {
                                         width: 5,
                                       ),
 
+                                      Text(
+                                        "• ", // Middle dot
+                                        style: TextStyle(
+                                            color: const Color.fromARGB(
+                                                255, 117, 116, 116),
+                                            fontSize: 24,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+
                                       // DISTANCE
                                       Transform.rotate(
                                         angle:
@@ -231,6 +240,66 @@ class _HomeState extends State<Home> {
                                                 Color.fromARGB(255, 161, 4, 91),
                                             fontSize: 20,
                                             fontWeight: FontWeight.w800),
+                                      ))
+                                ],
+                              ),
+
+                              //free delivery
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.directions_bike_outlined,
+                                        color: Color.fromARGB(255, 161, 4, 91),
+                                        size: 18,
+                                      ),
+                                      Text(
+                                        " Free Delivery ",
+                                        style: TextStyle(
+                                            color:
+                                                Color.fromARGB(255, 161, 4, 91),
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w900),
+                                      ),
+                                      Text(
+                                        "• ", // Middle dot
+                                        style: TextStyle(
+                                            color: const Color.fromARGB(
+                                                255, 117, 116, 116),
+                                            fontSize: 24,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Text(
+                                        "Min Order",
+                                        style: TextStyle(
+                                            color: Color.fromARGB(
+                                                255, 144, 150, 157),
+                                            fontSize: 15),
+                                      ),
+                                      Text(
+                                          " ${restaurantData!['MinOrderAmount']} ${restaurantData!['Currency']}",
+                                          style: TextStyle(
+                                              color: Color.fromARGB(
+                                                  255, 93, 99, 106),
+                                              fontSize: 15)),
+                                    ],
+                                  ),
+
+                                  //
+                                  ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.white,
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 5)),
+                                      onPressed: () {},
+                                      child: Row(
+                                        children: [
+                                          Icon(Icons.info_outline),
+                                          Text(' More Info'),
+                                        ],
                                       ))
                                 ],
                               ),
