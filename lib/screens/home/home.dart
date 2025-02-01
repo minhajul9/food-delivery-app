@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:food_delivery/components/discount_card/discount_card.dart';
 import 'package:http/http.dart' as http;
 
 class Home extends StatefulWidget {
@@ -14,6 +15,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   Map<String, dynamic>? restaurantData;
   bool isLoading = true;
+  List restaurantOffers = [];
 
   // Load restaurant data
   void loadRestaurantData() async {
@@ -32,10 +34,27 @@ class _HomeState extends State<Home> {
     }
   }
 
+  void loadRestaurantOffers() async {
+    setState(() {
+      isLoading = true;
+    });
+    final response = await http.get(Uri.parse(
+        'https://demo-api.devdata.top/api/RestaurantInfo/GetRestaurantOffer'));
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      setState(() {
+        restaurantOffers = data["data"];
+        isLoading = false;
+      });
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     loadRestaurantData();
+    loadRestaurantOffers();
   }
 
   @override
@@ -304,6 +323,28 @@ class _HomeState extends State<Home> {
                                 ],
                               ),
 
+                              // offers
+
+                              SizedBox(
+                                height: 160,
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  physics: BouncingScrollPhysics(),
+                                  itemCount: restaurantOffers.length,
+                                  itemBuilder: (context, index) {
+                                    return DiscountCard(
+                                      gradientColors: [
+                                        Colors.purple,
+                                        Colors.pink
+                                      ],
+                                      discountText: "20% off",
+                                      details: "Upto 300 AED",
+                                      deliveryText: "Free delivery",
+                                    );
+                                  },
+                                ),
+                              ),
+
                               //
                               Text(
                                 restaurantData!["Description"] ?? "",
@@ -313,6 +354,7 @@ class _HomeState extends State<Home> {
                                 ),
                               ),
                               // Add more details or widgets below
+
                               SizedBox(height: 16),
                               Row(
                                 children: [
